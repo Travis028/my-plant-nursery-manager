@@ -90,3 +90,28 @@ def add_employee(name, role):
     Session.add(new_employee)
     Session.commit()
     click.echo(f"✅ Employee '{name}' added!")
+
+#.....................Sales.....................
+@cli.group()
+def sale():
+    """Manage sales"""
+    pass    
+@sale.command('list')
+def list_sales():
+    sales = Session.query(Sale).all()
+    for s in sales:
+        click.echo(f"{s.id}: {s.quality} x {s.plant.name} to {s.customer.name}")
+
+
+@sale.command('add')
+@click.argument('plant_id', type=int)
+@click.argument('customer_id', type=int)
+@click.argument('quality', type=int)-   
+def add_sale(plant_id, customer_id, quality):
+    new_sale = Sale(plant_id=plant_id, customer_id=customer_id, quality=quality)
+    Session.add(new_sale)
+    Session.commit()
+    click.echo(f"✅ sale recorded!")
+
+if __name__ == '__main__':
+    cli()
