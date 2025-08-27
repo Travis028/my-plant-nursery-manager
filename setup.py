@@ -1,18 +1,16 @@
 
-from seruptools import setup, find_packages
+from setuptools import setup, find_packages
 
 setup(
-    name="my_package",
+    name="my-plant-nursery-manager",
     version="0.1",
     packages=find_packages(),
     install_requires=[
-        "sqlalchemy",
-        "alembic",
+        "SQLAlchemy",
         "click",
-
     ],
     entry_points={
-        'console_scripts': [
+        "console_scripts": [
             "nursery=lib.cli:cli",
         ],
     },
