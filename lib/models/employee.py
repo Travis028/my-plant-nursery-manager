@@ -1,4 +1,6 @@
-from sqlalchemy import column, Integer, String, Float
+from sqlalchemy import column, Integer, String, Float, Date, ForeignKey
+from sqlalchemy.orm import relationship
+from lib.database import Base
 from sqlalchemy.orm import base
 
 class Employee(Base):
@@ -9,5 +11,4 @@ class Employee(Base):
 
     def __repr__(self):
         return f"<Employee(name={self.name} - {self.role})>"
-    
     

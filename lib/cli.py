@@ -21,7 +21,7 @@ def plant():
     pass    
 
 @plant.command('list')
-def list_plants();
+def list_plants():
     plants = Session.query(Plant).all()
     for p in plants:
         click.echo(f"{p.id}: {p.name} - ${p.price}")
