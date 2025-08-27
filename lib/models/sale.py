@@ -3,4 +3,12 @@ from sqlalchemy.orm import relationship
 from lib.database import Base
 
 class Sale(Base):
+    __tablename__ = 'sales'
+    id = column(Integer, primary_key=True)
+    plant_id = column(Integer, foregn_key('plants.id'))
+    customer_id = column(Integer, foregn_key('customers.id'))
+    quality = column(Integer, default=1)
+
+
+    
     pass
