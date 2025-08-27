@@ -6,4 +6,8 @@ class Plant(Base):
     id = column(Integer, primary key=True)
     name = column(String, nullable=False)
     price = column(Float, nullable=False)
+
+    def __repr__(self):
+        return f"<plant(name={self.name} - ${self.price})>"
+    
     pass
