@@ -13,6 +13,8 @@ def cli():
     """Plant Nursery Management CLI"""
     pass
 
+#.....................plant.....................
+
 @cli.group()
 def plant():
     """Manage plants"""
@@ -45,3 +47,15 @@ def delete_plant(plant_id):
         click.echo(f"🗑️ Plant '{plant.name}' deleted!")
     else:
         click.echo("❌ Plant not found.")
+
+
+#.....................customer.....................
+@cli.group()
+def customer():
+    """Manage customers"""
+    pass
+@customer.command('list')
+def list_customers():
+    customers = Session.query(customer).all()
+    for c in customers:
+        click.echo(f"{c.id}: {c.name} - {c.email}")
