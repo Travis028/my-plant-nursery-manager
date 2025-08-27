@@ -12,4 +12,12 @@ def add_customer(first_name, last_name, email):
         session.commit()
         session.refresh(customer)
         return customer
+    
+def list_customers():
+    with SessionLocal() session:
+        return session.query(customer).all()
+    
+#-----plant CRUD operations-----
+
+
 
