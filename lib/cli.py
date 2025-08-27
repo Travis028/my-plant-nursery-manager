@@ -59,3 +59,24 @@ def list_customers():
     customers = Session.query(customer).all()
     for c in customers:
         click.echo(f"{c.id}: {c.name} - {c.email}")
+
+
+@customer.command('add')
+@click.argument('name')
+@click.argument('email')
+def add_customer(name, email):
+    new_customer = customer(name=name, email=email)
+    Session.add(new_customer)
+    Session.commit()
+    click.echo(f"✅ Customer '{name}' added!")
+
+#.....................Employees.....................
+@cli.group()
+def employee():
+    """Manage employees"""
+    pass    
+@employee.command('list')
+def list_employees():
+    employees = Session.query(Employee).all()
+    for e in employees:
+        click.echo(f"{e.id}: {e.name} - {e.role}")
