@@ -19,5 +19,18 @@ def list_customers():
     
 #-----plant CRUD operations-----
 
+def add_plant(name, species, price, care_instructions, inventory_count=0):
+    with SessionLocal() as session:
+        plant = plant(
+            name=name,
+            species=species,
+            price=price,
+            care_instructions=care_instructions,
+            inventory_count=inventory_count
+        )
 
+        session.add(plant)
+        session.commit()
+        session.refresh(plant)
+        return plant
 
