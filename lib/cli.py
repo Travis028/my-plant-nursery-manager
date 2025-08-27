@@ -19,4 +19,18 @@ def plant():
     pass    
 
 @plant.command('list')
-pass
+def list_plants();
+    plants = Session.query(Plant).all()
+    for p in plants:
+        click.echo(f"{p.id}: {p.name} - ${p.price}")
+
+
+@plant.command('add')
+@click.argument('name')
+@click.argument('price', type=float)
+def add_plant(name, price):
+    new_plant = Plant(name=name, price=price)
+    Session.add(new_plant)
+    Session.commit()
+    click.echo(f"✅ Plant '{name}' added!")
+    
