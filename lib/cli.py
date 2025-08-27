@@ -33,4 +33,15 @@ def add_plant(name, price):
     Session.add(new_plant)
     Session.commit()
     click.echo(f"✅ Plant '{name}' added!")
-    
+
+
+@plant.command('delete')
+@click.argument('plant_id', type=int)
+def delete_plant(plant_id):
+    plant = Session.query(Plant).get(plant_id)
+    if plant:
+        Session.delete(plant)
+        Session.commit()
+        click.echo(f"🗑️ Plant '{plant.name}' deleted!")
+    else:
+        click.echo("❌ Plant not found.")
