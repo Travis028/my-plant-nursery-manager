@@ -7,3 +7,16 @@ from lib.models.sale import Sale
 from lib.models.employee import Employee
 
 Base.metadata.create_all(engine)
+
+@click.group()
+def cli():
+    """Plant Nursery Management CLI"""
+    pass
+
+@cli.group()
+def plant():
+    """Manage plants"""
+    pass    
+
+@plant.command('list')
+pass
