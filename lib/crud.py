@@ -37,4 +37,22 @@ def add_plant(name, species, price, care_instructions, inventory_count=0):
 def list_plants():
     with SessionLocal() as session:
         return session.query(Plant).all()
+    
+#----employee CRUD operations-----
 
+
+def add_employee(first_name, last_name, hire_date=None):
+    with SessionLocal() as session:
+        if not hire_date:
+            hire_date = date.today()
+        employee = Employee(first_name=first_name, last_name=last_name, hire_date=hire_date)
+        session.add(employee)
+        session.commit()
+        session.refresh(employee)
+        return employee
+
+def list_employees():
+    with SessionLocal() as session:
+        return session.query(Employee).all()
+    
+#-----sale CRUD operations-----
