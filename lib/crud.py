@@ -33,4 +33,8 @@ def add_plant(name, species, price, care_instructions, inventory_count=0):
         session.commit()
         session.refresh(plant)
         return plant
+    
+def list_plants():
+    with SessionLocal() as session:
+        return session.query(Plant).all()
 
