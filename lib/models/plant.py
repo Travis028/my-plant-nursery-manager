@@ -10,4 +10,4 @@ class Plant(Base):
     def __repr__(self):
         return f"<plant(name={self.name} - ${self.price})>"
     
-    pass
+    
