@@ -80,3 +80,13 @@ def list_employees():
     employees = Session.query(Employee).all()
     for e in employees:
         click.echo(f"{e.id}: {e.name} - {e.role}")
+
+
+@employee.command('add')
+@click.argument('name')
+@click.argument('role')
+def add_employee(name, role):
+    new_employee = Employee(name=name, role=role)
+    Session.add(new_employee)
+    Session.commit()
+    click.echo(f"✅ Employee '{name}' added!")
