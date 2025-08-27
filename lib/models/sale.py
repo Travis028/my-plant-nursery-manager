@@ -9,6 +9,11 @@ class Sale(Base):
     customer_id = column(Integer, foregn_key('customers.id'))
     quality = column(Integer, default=1)
 
+    plant relationship("plant")
+    customer relationship("customer")
 
-    
-    pass
+    def __repr__(self):
+        return f"<self {self.quality} x {self.plant.name} to {self.customer.name}>"
+
+
+
