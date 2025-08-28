@@ -12,3 +12,12 @@ def test_add_and_list_plants(monkeypatch, capsys):
 
     monkeypatch.setattr(builtins, "input", lambda _: "Lily" if _ == "Enter plant name: " else "20")
     add_plant(session)
+
+    plants = session.query(Plant).all()
+    assert len(plants) == 1
+    assert plants[0].name == "Lily"
+    assert plants[0].price == 20
+
+    list_plants(session)
+    captured = capsys.readouterr()
+    assert "Lily" in captured.out
