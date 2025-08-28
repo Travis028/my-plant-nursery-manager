@@ -1,4 +1,4 @@
-import click_
+import click
  
 from lib.database import Base, engine, Session
 from lib.models.plant import Plant
@@ -106,7 +106,7 @@ def list_sales():
 @sale.command('add')
 @click.argument('plant_id', type=int)
 @click.argument('customer_id', type=int)
-@click.argument('quality', type=int)-   
+@click.argument('quality', type=int)   
 def add_sale(plant_id, customer_id, quality):
     new_sale = Sale(plant_id=plant_id, customer_id=customer_id, quality=quality)
     Session.add(new_sale)
