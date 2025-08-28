@@ -39,3 +39,9 @@ class Sale(Base):
     customer_id = Column(Integer, ForeignKey("customers.id"))
     employee_id = Column(Integer, ForeignKey("employees.id"))
     quantity = Column(Integer, nullable=False)
+
+
+
+    plant = relationship("Plant", back_populates="sales")
+    customer = relationship("Customer", back_populates="sales")
+    employee = relationship("Employee", back_populates="sales")
