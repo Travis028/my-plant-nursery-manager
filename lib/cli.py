@@ -1,117 +1,82 @@
-import click
- 
-from lib.database import Base, engine, Session
-from lib.models.plant import Plant
-from lib.models.customer import customer
-from lib.models.sale import Sale
-from lib.models.employee import Employee
+from lib.database import Session
+from lib.models import Plant, Customer, Employee, Sale
 
-Base.metadata.create_all(engine)
-
-@click.group()
-def cli():
-    """Plant Nursery Management CLI"""
-    pass
-
-#.....................plant.....................
-
-@cli.group()
-def plant():
-    """Manage plants"""
-    pass    
-
-@plant.command('list')
-def list_plants():
-    plants = Session.query(Plant).all()
-    for p in plants:
-        click.echo(f"{p.id}: {p.name} - ${p.price}")
-
-
-@plant.command('add')
-@click.argument('name')
-@click.argument('price', type=float)
-def add_plant(name, price):
-    new_plant = Plant(name=name, price=price)
-    Session.add(new_plant)
-    Session.commit()
-    click.echo(f"✅ Plant '{name}' added!")
-
-
-@plant.command('delete')
-@click.argument('plant_id', type=int)
-def delete_plant(plant_id):
-    plant = Session.query(Plant).get(plant_id)
-    if plant:
-        Session.delete(plant)
-        Session.commit()
-        click.echo(f"🗑️ Plant '{plant.name}' deleted!")
+def list_plants(session):
+    plants = session.query(Plant).all()
+    if not plants:
+        print("No plants found.")
     else:
-        click.echo("❌ Plant not found.")
+        for plant in plants:
+            print(f"{plant.id}. {plant.name} - ${plant.price}")
 
+def add_plant(session):
+    name = input("Enter plant name: ")
+    price = int(input("Enter price: "))
+    plant = Plant(name=name, price=price)
+    session.add(plant)
+    session.commit()
+    print("Plant added successfully!")
 
-#.....................customer.....................
-@cli.group()
-def customer():
-    """Manage customers"""
-    pass
-@customer.command('list')
-def list_customers():
-    customers = Session.query(customer).all()
-    for c in customers:
-        click.echo(f"{c.id}: {c.name} - {c.email}")
+def record_sale(session):
+    list_plants(session)
+    plant_id = int(input("Enter plant ID to sell: "))
+    customer_name = input("Enter customer name: ")
+    employee_name = input("Enter employee name: ")
 
+    customer = session.query(Customer).filter_by(name=customer_name).first()
+    if not customer:
+        customer = Customer(name=customer_name)
+        session.add(customer)
 
-@customer.command('add')
-@click.argument('name')
-@click.argument('email')
-def add_customer(name, email):
-    new_customer = customer(name=name, email=email)
-    Session.add(new_customer)
-    Session.commit()
-    click.echo(f"✅ Customer '{name}' added!")
+    employee = session.query(Employee).filter_by(name=employee_name).first()
+    if not employee:
+        employee = Employee(name=employee_name)
+        session.add(employee)
 
-#.....................Employees.....................
-@cli.group()
-def employee():
-    """Manage employees"""
-    pass    
-@employee.command('list')
-def list_employees():
-    employees = Session.query(Employee).all()
-    for e in employees:
-        click.echo(f"{e.id}: {e.name} - {e.role}")
+    plant = session.query(Plant).get(plant_id)
+    if not plant:
+        print("Invalid plant ID.")
+        return
 
+    sale = Sale(plant=plant, customer=customer, employee=employee)
+    session.add(sale)
+    session.commit()
+    print("Sale recorded!")
 
-@employee.command('add')
-@click.argument('name')
-@click.argument('role')
-def add_employee(name, role):
-    new_employee = Employee(name=name, role=role)
-    Session.add(new_employee)
-    Session.commit()
-    click.echo(f"✅ Employee '{name}' added!")
+def list_sales(session):
+    sales = session.query(Sale).all()
+    if not sales:
+        print("No sales yet.")
+    else:
+        for sale in sales:
+            print(f"Sale #{sale.id}: {sale.customer.name} bought {sale.plant.name} from {sale.employee.name}")
 
-#.....................Sales.....................
-@cli.group()
-def sale():
-    """Manage sales"""
-    pass    
-@sale.command('list')
-def list_sales():
-    sales = Session.query(Sale).all()
-    for s in sales:
-        click.echo(f"{s.id}: {s.quality} x {s.plant.name} to {s.customer.name}")
+def main():
+    session = Session()
 
+    while True:
+        print("\n🌱 Plant Nursery Manager 🌱")
+        print("1. List plants")
+        print("2. Add plant")
+        print("3. Record sale")
+        print("4. List sales")
+        print("5. Exit")
 
-@sale.command('add')
-@click.argument('plant_id', type=int)
-@click.argument('customer_id', type=int)
-@click.argument('quality', type=int)   
-def add_sale(plant_id, customer_id, quality):
-    new_sale = Sale(plant_id=plant_id, customer_id=customer_id, quality=quality)
-    Session.add(new_sale)
-    Session.commit()
-    click.echo(f"✅ sale recorded!")
+        choice = input("Choose an option: ")
 
-if __name__ == '__main__':
-    cli()
+        if choice == "1":
+            list_plants(session)
+        elif choice == "2":
+            add_plant(session)
+        elif choice == "3":
+            record_sale(session)
+        elif choice == "4":
+            list_sales(session)
+        elif choice == "5":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice, try again.")
+
+if __name__ == "__main__":
+    main()
