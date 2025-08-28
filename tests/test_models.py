@@ -33,3 +33,12 @@ def test_record_sale(session):
     employee = Employee(name="Cashier")
     session.add_all([plant, customer, employee])
     session.commit()
+    
+    sale = Sale(plant=plant, customer=customer, employee=employee)
+    session.add(sale)
+    session.commit()
+
+    assert sale.id is not None
+    assert sale.plant.name == "Cactus"
+    assert sale.customer.name == "Buyer"
+    assert sale.employee.name == "Cashier"
