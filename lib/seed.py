@@ -22,3 +22,17 @@ plants = [
 ]
 session.add_all(plants)
 
+customers = [
+    Customer(name="Alice Johnson", email="alice@example.com", phone="123456789"),
+    Customer(name="Bob Smith", email="bob@example.com", phone="987654321"),
+]
+session.add_all(customers)
+
+
+employees = [
+    Employee(name="Jane Doe", hire_date=date(2022, 5, 10)),
+    Employee(name="Mark Lee", hire_date=date(2023, 1, 15)),
+]
+session.add_all(employees)
+
+session.commit()
