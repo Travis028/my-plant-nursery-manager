@@ -1,38 +1,23 @@
-from datetime import date
-from sqlalchemy.orm import sessionmaker
-from lib.database import engine
-from lib.models import Base, Plant, Customer, Employee, Sale
+from lib.database import Base, engine, Session
+from lib.models.plant import Plant
+from lib.models.customer import Customer
+from lib.models.employee import Employee
+from lib.models.sale import Sale
 
+def seed():
+    # reset database
+    Base.metadata.drop_all(engine)
+    Base.metadata.create_all(engine)
 
-Base.metadata.create_all(engine)
+    session = Session()
 
-Session = sessionmaker(bind=engine)
-session = Session()
+    plant1 = Plant(name="Rose", price=10.0)
+    plant2 = Plant(name="Tulip", price=8.5)
+    customer1 = Customer(name="Alice")
+    employee1 = Employee(name="John Doe")
 
+    session.add_all([plant1, plant2, customer1, employee1])
+    session.commit()
+    session.close()
 
-session.query(Sale).delete()
-session.query(Plant).delete()
-session.query(Customer).delete()
-session.query(Employee).delete()
-
-plants = [
-    Plant(name="Rose", category="Flower", price=5.0, care_instructions="Water daily", stock=30),
-    Plant(name="Tulip", category="Flower", price=3.0, care_instructions="Water every 2 days", stock=20),
-    Plant(name="Aloe Vera", category="Succulent", price=7.5, care_instructions="Water weekly", stock=15),
-]
-session.add_all(plants)
-
-customers = [
-    Customer(name="Alice Johnson", email="alice@example.com", phone="123456789"),
-    Customer(name="Bob Smith", email="bob@example.com", phone="987654321"),
-]
-session.add_all(customers)
-
-
-employees = [
-    Employee(name="Jane Doe", hire_date=date(2022, 5, 10)),
-    Employee(name="Mark Lee", hire_date=date(2023, 1, 15)),
-]
-session.add_all(employees)
-
-session.commit()
+    print("✅ Database seeded successfully!")
