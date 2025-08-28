@@ -45,3 +45,7 @@ class Sale(Base):
     plant = relationship("Plant", back_populates="sales")
     customer = relationship("Customer", back_populates="sales")
     employee = relationship("Employee", back_populates="sales")
+
+    def __repr__(self):
+        return f"<Sale(plant_id={self.plant_id}, customer_id={self.customer_id}, employee_id={self.employee_id}, quantity={self.quantity})>"
+    
