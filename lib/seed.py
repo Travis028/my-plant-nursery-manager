@@ -17,7 +17,7 @@ def seed():
     session.commit()
     
     # Create a sample sale
-    sale = Sale(plant_id=plant1.id, customer_id=customer1.id, employee_id=employee1.id, quantity=2, total_price=plant1.price * 2)
+    sale = Sale(plant_id=plant1.id, customer_id=customer1.id, employee_id=employee1.id)
     session.add(sale)
     session.commit()
     
