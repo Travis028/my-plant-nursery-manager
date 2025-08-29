@@ -27,7 +27,7 @@ def delete(session: Session, model: Type[T], id: int) -> bool:
         return True
     return False
 
-def validate_plant_data(name: str, price: float) -> tuple[bool, str]:
+def validate_plant_data(name: str, price: float) -> 'Tuple[bool, str]':
     """Validate plant data."""
     if not name or len(name.strip()) < 2:
         return False, "Name must be at least 2 characters long"
@@ -35,7 +35,7 @@ def validate_plant_data(name: str, price: float) -> tuple[bool, str]:
         return False, "Price must be greater than 0"
     return True, ""
 
-def validate_sale_data(plant_id: int, customer_id: int, employee_id: int, quantity: int) -> tuple[bool, str]:
+def validate_sale_data(plant_id: int, customer_id: int, employee_id: int, quantity: int) -> 'Tuple[bool, str]':
     """Validate sale data."""
     if quantity <= 0:
         return False, "Quantity must be greater than 0"

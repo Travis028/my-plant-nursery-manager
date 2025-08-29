@@ -21,11 +21,36 @@ class Sale(Base):
     customer = relationship("Customer", back_populates="sales")
     employee = relationship("Employee", back_populates="sales")
 
-    def __init__(self, plant_id: int, customer_id: int, employee_id: int, 
-                 quantity: int = 1, total_price: Optional[float] = None):
-        self.plant_id = plant_id
-        self.customer_id = customer_id
-        self.employee_id = employee_id
+    def __init__(self, plant_id: int = None, customer_id: int = None, employee_id: int = None,
+                 plant=None, customer=None, employee=None, quantity: int = 1, 
+                 total_price: Optional[float] = None):
+        """Initialize a new Sale instance.
+        
+        Args:
+            plant_id: ID of the plant (alternative to plant object)
+            customer_id: ID of the customer (alternative to customer object)
+            employee_id: ID of the employee (alternative to employee object)
+            plant: Plant object (alternative to plant_id)
+            customer: Customer object (alternative to customer_id)
+            employee: Employee object (alternative to employee_id)
+            quantity: Number of items sold (default: 1)
+            total_price: Total price (calculated if not provided)
+        """
+        if plant is not None:
+            self.plant = plant
+        elif plant_id is not None:
+            self.plant_id = plant_id
+            
+        if customer is not None:
+            self.customer = customer
+        elif customer_id is not None:
+            self.customer_id = customer_id
+            
+        if employee is not None:
+            self.employee = employee
+        elif employee_id is not None:
+            self.employee_id = employee_id
+            
         self.quantity = quantity
         self.total_price = total_price if total_price is not None else 0.0
 
