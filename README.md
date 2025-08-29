@@ -68,3 +68,32 @@ For test coverage report:
 python -m pytest --cov=lib tests/
 ```
 
+## Project Structure
+
+```
+my-plant-nursery-manager/
+├── lib/                    # Main package
+│   ├── __init__.py        # Package initialization
+│   ├── cli.py             # Command-line interface
+│   ├── database.py        # Database configuration
+│   ├── seed.py            # Database seeding
+│   └── models/            # Data models
+│       ├── __init__.py
+│       ├── plant.py
+│       ├── customer.py
+│       ├── employee.py
+│       └── sale.py
+├── tests/                
+│   ├── __init__.py
+│   ├── test_cli.py
+│   ├── test_models.py
+│   └── test_seed.py
+├── requirements.txt    
+└── README.md            
+```
+
+## License
+
+MIT License
+
+
