@@ -1,6 +1,6 @@
 import pytest
+from lib import Plant, Customer, Employee, Sale
 from lib.database import Base, engine, Session
-from lib.models import Plant, Customer, Employee, Sale
 
 @pytest.fixture(scope="function")
 def session():

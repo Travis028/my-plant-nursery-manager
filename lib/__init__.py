@@ -1,7 +1,7 @@
-from ..database import Base
-from .plant import Plant
-from .customer import Customer
-from .employee import Employee
-from .sale import Sale
+from .database import Base
+from .models.plant import Plant
+from .models.customer import Customer
+from .models.employee import Employee
+from .models.sale import Sale
 
 __all__ = ["Plant", "Customer", "Employee", "Sale"]

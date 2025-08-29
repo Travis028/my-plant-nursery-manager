@@ -1,8 +1,5 @@
-from lib.database import Base, engine, Session
-from lib.models.plant import Plant
-from lib.models.customer import Customer
-from lib.models.employee import Employee
-from lib.models.sale import Sale
+from .database import Base, engine, Session
+from . import Plant, Customer, Employee, Sale
 
 def seed():
     # reset database

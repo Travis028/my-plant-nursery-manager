@@ -1,6 +1,6 @@
-from lib.seed import seed
 from lib.database import Session
-from lib.models import Plant, Customer, Employee, Sale
+from lib import Plant, Customer, Employee, Sale
+from lib.seed import seed
 
 def test_seed_creates_data():
     seed()

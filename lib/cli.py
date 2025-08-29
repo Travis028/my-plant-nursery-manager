@@ -1,5 +1,5 @@
-from lib.database import Session
-from lib.models import Plant, Customer, Employee, Sale
+from .database import Session
+from . import Plant, Customer, Employee, Sale
 
 def list_plants(session):
     plants = session.query(Plant).all()

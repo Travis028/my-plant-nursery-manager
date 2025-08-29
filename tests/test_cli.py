@@ -1,6 +1,6 @@
 import builtins
 from lib.database import Base, engine, Session
-from lib.models import Plant
+from lib import Plant
 from lib.cli import add_plant, list_plants
 
 def setup_function():
