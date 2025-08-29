@@ -4,11 +4,11 @@ A command-line application for managing a plant nursery, built with Python and S
 
 ## Features
 
-- 🪴 Manage plant inventory
-- 👥 Track customers and employees
-- 💰 Record sales transactions
-- 🧪 Comprehensive test coverage
-- 🚀 Easy to set up and use
+- Manage plant inventory
+- Track customers and employees
+- Record sales transactions
+- Comprehensive test coverage
+- Easy to set up and use
 
 ## Prerequisites
 
@@ -20,14 +20,13 @@ A command-line application for managing a plant nursery, built with Python and S
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/my-plant-nursery-manager.git
+   git clone https://github.com/travis028/my-plant-nursery-manager.git
    cd my-plant-nursery-manager
    ```
 
 2. Create a virtual environment (recommended):
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 3. Install dependencies:
