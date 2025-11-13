@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <div>
+            <h2 style="color: #2e7d32; margin-bottom: 5px;">
+                <i class="fas fa-user" style="margin-right: 10px;"></i>
+                User Profile
+            </h2>
+            <p style="color: #6c757d;">Manage your account settings and information</p>
+        </div>
+        <a href="/dashboard" class="btn btn-secondary" style="text-decoration: none;">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Profile Information Card -->
+    <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div style="background: {% if user_data.get('role') == 'admin' %}#dc3545{% elif user_data.get('role') == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                <i class="fas fa-{% if user_data.get('role') == 'admin' %}crown{% elif user_data.get('role') == 'manager' %}user-tie{% else %}user{% endif %}" style="font-size: 2.5rem; color: white;"></i>
+            </div>
+            <h3 style="color: #333; margin-bottom: 10px;">{{ username }}</h3>
+            <span style="background: {% if user_data.get('role') == 'admin' %}#f8d7da; color: #721c24{% elif user_data.get('role') == 'manager' %}#e8f5e8; color: #2e7d32{% else %}#e3f2fd; color: #1976d2{% endif %}; padding: 8px 16px; border-radius: 20px; font-weight: 600;">
+                {{ user_data.get('role', 'user')|title }}
+            </span>
+        </div>
+
+        <!-- Account Details -->
+        <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin-bottom: 30px;">
+            <h4 style="color: #495057; margin-bottom: 20px;">
+                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+                Account Information
+            </h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <div style="color: #6c757d; font-size: 0.9rem; margin-bottom: 5px;">Username</div>
+                    <div style="color: #333; font-weight: 600;">{{ username }}</div>
+                </div>
+                <div>
+                    <div style="color: #6c757d; font-size: 0.9rem; margin-bottom: 5px;">Role</div>
+                    <div style="color: #333; font-weight: 600;">{{ user_data.get('role', 'user')|title }}</div>
+                </div>
+                <div>
+                    <div style="color: #6c757d; font-size: 0.9rem; margin-bottom: 5px;">Status</div>
+                    <div style="color: #28a745; font-weight: 600;">
+                        <i class="fas fa-check-circle" style="margin-right: 5px;"></i>
+                        Active
+                    </div>
+                </div>
+                <div>
+                    <div style="color: #6c757d; font-size: 0.9rem; margin-bottom: 5px;">Access Level</div>
+                    <div style="color: #333; font-weight: 600;">
+                        {% if user_data.get('role') == 'admin' %}
+                            Full System Access
+                        {% elif user_data.get('role') == 'manager' %}
+                            Plant Management
+                        {% else %}
+                            Sales & Viewing
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change Password Form -->
+        <h4 style="color: #2e7d32; margin-bottom: 20px;">
+            <i class="fas fa-lock" style="margin-right: 8px;"></i>
+            Change Password
+        </h4>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-key" style="margin-right: 8px; color: #2e7d32;"></i>
+                    New Password
+                </label>
+                <input type="password" id="password" name="password" placeholder="Enter new password">
+                <small style="color: #6c757d; font-size: 0.9rem;">Leave blank to keep current password</small>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <button type="submit" class="btn">
+                    <i class="fas fa-save"></i> Update Password
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Admin User Management -->
+    {% if user_data.get('role') == 'admin' %}
+    <div style="background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%); padding: 25px; border-radius: 15px; border-left: 4px solid #dc3545; margin-bottom: 30px;">
+        <h4 style="color: #721c24; margin-bottom: 20px;">
+            <i class="fas fa-users-cog" style="margin-right: 8px;"></i>
+            User Management
+        </h4>
+        <p style="color: #721c24; margin-bottom: 20px; font-size: 0.95rem;">As an administrator, you can grant access to new users and managers.</p>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <a href="/manage_users" class="btn" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); text-decoration: none;">
+                <i class="fas fa-user-plus"></i> Add New User
+            </a>
+            <a href="/manage_users" class="btn btn-secondary" style="text-decoration: none;">
+                <i class="fas fa-users"></i> View All Users
+            </a>
+        </div>
+    </div>
+
+    <!-- Admin Activity Overview -->
+    <div style="background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); padding: 25px; border-radius: 15px; border-left: 4px solid #856404; margin-bottom: 30px;">
+        <h4 style="color: #856404; margin-bottom: 20px;">
+            <i class="fas fa-chart-bar" style="margin-right: 8px;"></i>
+            Admin Activity Overview
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px;">
+            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 10px;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: #856404;">{{ users|length - 1 }}</div>
+                <div style="color: #856404; font-size: 0.9rem;">Users Created</div>
+            </div>
+            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 10px;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: #856404;">{{ plants_count or 0 }}</div>
+                <div style="color: #856404; font-size: 0.9rem;">Plants Managed</div>
+            </div>
+            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 10px;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: #856404;">Active</div>
+                <div style="color: #856404; font-size: 0.9rem;">System Status</div>
+            </div>
+        </div>
+        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+            <h5 style="color: #856404; margin-bottom: 10px; font-size: 0.95rem;">Current System Users:</h5>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                {% for user, data in users.items() %}
+                <span style="background: {% if data.get('role') == 'admin' %}#dc3545{% elif data.get('role') == 'manager' %}#28a745{% else %}#007bff{% endif %}; color: white; padding: 5px 12px; border-radius: 15px; font-size: 0.85rem;">
+                    <i class="fas fa-{% if data.get('role') == 'admin' %}crown{% elif data.get('role') == 'manager' %}user-tie{% else %}user{% endif %}" style="margin-right: 5px;"></i>
+                    {{ user }} ({{ data.get('role', 'user')|title }})
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Permissions Card -->
+    <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 25px; border-radius: 15px; border-left: 4px solid #1976d2;">
+        <h4 style="color: #1565c0; margin-bottom: 15px;">
+            <i class="fas fa-shield-alt" style="margin-right: 8px;"></i>
+            Your Permissions
+        </h4>
+        <div style="color: #6c757d;">
+            {% if user_data.get('role') == 'admin' %}
+            <ul style="margin: 0; padding-left: 20px;">
+                <li>Register new users and managers</li>
+                <li>Delete plants from inventory</li>
+                <li>Full system administration</li>
+                <li>View all data and analytics</li>
+            </ul>
+            {% elif user_data.get('role') == 'manager' %}
+            <ul style="margin: 0; padding-left: 20px;">
+                <li>Add and edit plants in inventory</li>
+                <li>Record sales transactions</li>
+                <li>View all plants and sales data</li>
+                <li>Manage customer information</li>
+            </ul>
+            {% else %}
+            <ul style="margin: 0; padding-left: 20px;">
+                <li>View plant inventory</li>
+                <li>Record sales transactions</li>
+                <li>View sales analytics</li>
+                <li>Access customer data</li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

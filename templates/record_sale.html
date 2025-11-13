@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 40px;">
+        <div style="background: linear-gradient(135deg, #c2185b 0%, #e91e63 100%); width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+            <i class="fas fa-cash-register" style="font-size: 2.5rem; color: white;"></i>
+        </div>
+        <h2 style="color: #c2185b; margin-bottom: 10px;">Record New Sale</h2>
+        <p style="color: #6c757d;">Process a transaction and update your sales records</p>
+    </div>
+
+    {% if plants %}
+    <div style="background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        <form method="POST">
+            <div class="form-group">
+                <label for="plant_id">
+                    <i class="fas fa-seedling" style="margin-right: 8px; color: #2e7d32;"></i>
+                    Select Plant
+                </label>
+                <select id="plant_id" name="plant_id" required onchange="updatePrice()">
+                    <option value="">Choose a plant from inventory...</option>
+                    {% for plant in plants %}
+                    <option value="{{ plant.id }}" data-price="{{ plant.price }}">
+                        {{ plant.name }} - {{ plant.price|ksh }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <small style="color: #6c757d; font-size: 0.9rem;">Select the plant being sold</small>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 15px; margin: 25px 0; display: none;" id="price-display">
+                <div style="text-align: center;">
+                    <div style="color: #6c757d; font-size: 0.9rem; margin-bottom: 5px;">Sale Amount</div>
+                    <div style="color: #2e7d32; font-size: 2rem; font-weight: 600;" id="selected-price">KSh 0.00</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                    <label for="customer_name">
+                        <i class="fas fa-user" style="margin-right: 8px; color: #1976d2;"></i>
+                        Customer Name
+                    </label>
+                    <input type="text" id="customer_name" name="customer_name" required placeholder="Enter customer's full name">
+                    <small style="color: #6c757d; font-size: 0.9rem;">New customers will be automatically added</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="employee_name">
+                        <i class="fas fa-user-tie" style="margin-right: 8px; color: #c2185b;"></i>
+                        Employee Name
+                    </label>
+                    <input type="text" id="employee_name" name="employee_name" required placeholder="Enter employee's name">
+                    <small style="color: #6c757d; font-size: 0.9rem;">Track who made the sale</small>
+                </div>
+            </div>
+            
+            <div style="background: #e8f5e8; padding: 20px; border-radius: 15px; margin: 25px 0; border-left: 4px solid #2e7d32;">
+                <h4 style="color: #2e7d32; margin-bottom: 15px;">
+                    <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+                    Transaction Details
+                </h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div>
+                        <div style="color: #6c757d; font-size: 0.9rem;">Payment Method</div>
+                        <div style="color: #333; font-weight: 500;">Cash/M-Pesa</div>
+                    </div>
+                    <div>
+                        <div style="color: #6c757d; font-size: 0.9rem;">Transaction Date</div>
+                        <div style="color: #333; font-weight: 500;" id="current-date"></div>
+                    </div>
+                    <div>
+                        <div style="color: #6c757d; font-size: 0.9rem;">Status</div>
+                        <div style="color: #2e7d32; font-weight: 500;">
+                            <i class="fas fa-check-circle" style="margin-right: 5px;"></i>
+                            Ready to Process
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 15px; margin-top: 30px;">
+                <button type="submit" class="btn" style="flex: 1; justify-content: center; font-size: 1.1rem; padding: 15px;">
+                    <i class="fas fa-check"></i> Complete Sale
+                </button>
+                <a href="/sales" class="btn btn-secondary" style="flex: 0 0 auto; text-decoration: none; padding: 15px 25px;">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+
+    {% else %}
+    <div class="empty-state">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3 style="color: #6c757d; margin-bottom: 15px;">No Plants Available</h3>
+        <p style="margin-bottom: 30px;">You need to add plants to your inventory before recording sales.</p>
+        <a href="/add_plant" class="btn">
+            <i class="fas fa-plus"></i> Add Plants First
+        </a>
+    </div>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="/sales" style="color: #6c757d; text-decoration: none;">
+            <i class="fas fa-arrow-left" style="margin-right: 5px;"></i>
+            Back to Sales Analytics
+        </a>
+    </div>
+</div>
+
+<script>
+function updatePrice() {
+    const select = document.getElementById('plant_id');
+    const priceDisplay = document.getElementById('price-display');
+    const selectedPrice = document.getElementById('selected-price');
+    
+    if (select.value) {
+        const price = select.options[select.selectedIndex].getAttribute('data-price');
+        selectedPrice.textContent = 'KSh ' + parseFloat(price).toLocaleString('en-KE', {minimumFractionDigits: 2});
+        priceDisplay.style.display = 'block';
+    } else {
+        priceDisplay.style.display = 'none';
+    }
+}
+
+// Set current date
+document.getElementById('current-date').textContent = new Date().toLocaleDateString();
+</script>
+{% endblock %}
