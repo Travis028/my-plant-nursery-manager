@@ -76,7 +76,7 @@ const indexHtml = `
         <h1>Plant Nursery Manager</h1>
         <p>Modern web application for managing your plant nursery business with role-based authentication, real-time currency conversion, and beautiful responsive interface.</p>
         
-        <a href="/.netlify/functions/app" class="btn">
+        <a href="pages/login.html" class="btn">
             <i class="fas fa-sign-in-alt"></i> Launch Application
         </a>
         
