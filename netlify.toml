@@ -1,4 +1,5 @@
 [build]
+  command = "npm run build"
   functions = "netlify/functions"
   publish = "dist"
 
@@ -6,21 +7,11 @@
   python_runtime = "python3.8"
 
 [[redirects]]
-  from = "/"
-  to = "/.netlify/functions/app"
+  from = "/app/*"
+  to = "/.netlify/functions/app/:splat"
   status = 200
 
 [[redirects]]
-  from = "/login"
-  to = "/.netlify/functions/app/login"
-  status = 200
-
-[[redirects]]
-  from = "/dashboard"
-  to = "/.netlify/functions/app/dashboard"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/app"
+  from = "/api/*"
+  to = "/.netlify/functions/app/:splat"
   status = 200

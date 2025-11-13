@@ -1,4 +1,15 @@
+const fs = require('fs');
+const path = require('path');
 
+console.log('Building Plant Nursery Manager...');
+
+// Create dist directory if it doesn't exist
+if (!fs.existsSync('dist')) {
+  fs.mkdirSync('dist');
+}
+
+// Copy static files to dist
+const indexHtml = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,3 +99,10 @@
     </div>
 </body>
 </html>
+`;
+
+fs.writeFileSync('dist/index.html', indexHtml);
+
+console.log('✅ Build completed successfully!');
+console.log('📁 Files created in dist/ directory');
+console.log('🚀 Ready for Netlify deployment');

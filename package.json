@@ -1,0 +1,11 @@
+{
+  "name": "plant-nursery-manager",
+  "version": "1.0.0",
+  "description": "Plant Nursery Management System",
+  "scripts": {
+    "build": "node build.js",
+    "start": "python run_web.py"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
