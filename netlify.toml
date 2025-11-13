@@ -1,17 +1,3 @@
 [build]
-command = "npm run build"
-functions = "netlify/functions"
-publish = "dist"
-
-[functions]
-python_runtime = "python3.8"
-
-[[redirects]]
-from = "/app/*"
-to = "/.netlify/functions/app/:splat"
-status = 200
-
-[[redirects]]
-from = "/api/*"
-to = "/.netlify/functions/app/:splat"
-status = 200
+  publish = "dist"
+  command = "npm run build"
