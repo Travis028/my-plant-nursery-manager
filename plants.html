@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plants - Plant Nursery Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
+        .header { background: linear-gradient(135deg, #2e7d32, #4caf50); color: white; padding: 20px 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .nav { display: flex; justify-content: space-between; align-items: center; }
+        .nav h1 { font-size: 1.8rem; }
+        .btn { background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border: none; border-radius: 6px; text-decoration: none; }
+        .main-content { padding: 30px 0; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .page-header h2 { color: #2e7d32; }
+        .plants-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .plant-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .plant-card:hover { transform: translateY(-5px); }
+        .plant-image { height: 200px; background: linear-gradient(135deg, #e8f5e8, #c8e6c9); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .plant-info { padding: 20px; }
+        .plant-name { font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; color: #2e7d32; }
+        .plant-price { font-size: 1.5rem; font-weight: 700; color: #f57c00; margin-bottom: 15px; }
+        .plant-actions { display: flex; gap: 10px; }
+        .btn-small { background: linear-gradient(135deg, #2e7d32, #4caf50); color: white; padding: 8px 16px; border: none; border-radius: 6px; text-decoration: none; font-size: 0.9rem; }
+        .btn-edit { background: linear-gradient(135deg, #1976d2, #2196f3); }
+        .btn-delete { background: linear-gradient(135deg, #d32f2f, #f44336); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="nav">
+                <h1>🌱 Plant Inventory</h1>
+                <a href="dashboard.html" class="btn">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="page-header">
+                <h2>Plant Inventory</h2>
+                <a href="add-plant.html" class="btn-small">
+                    <i class="fas fa-plus"></i> Add New Plant
+                </a>
+            </div>
+            
+            <div class="plants-grid" id="plantsGrid">
+                <!-- Plants will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('user')) {
+            window.location.href = 'login.html';
+        }
+        
+        // Sample plant data matching the seeded database
+        const plants = [
+            { id: 1, name: 'Monstera Deliciosa', price: 'KSh 3,250', icon: '🌿' },
+            { id: 2, name: 'Snake Plant (Sansevieria)', price: 'KSh 1,560', icon: '🐍' },
+            { id: 3, name: 'Fiddle Leaf Fig', price: 'KSh 4,550', icon: '🌱' },
+            { id: 4, name: 'Peace Lily', price: 'KSh 2,340', icon: '🕊️' },
+            { id: 5, name: 'Rubber Plant', price: 'KSh 2,860', icon: '🌳' },
+            { id: 6, name: 'Aloe Vera', price: 'KSh 1,040', icon: '🌵' },
+            { id: 7, name: 'Spider Plant', price: 'KSh 1,300', icon: '🕷️' },
+            { id: 8, name: 'Pothos (Golden)', price: 'KSh 1,950', icon: '🌿' },
+            { id: 9, name: 'ZZ Plant', price: 'KSh 2,600', icon: '🌱' },
+            { id: 10, name: 'Bird of Paradise', price: 'KSh 5,200', icon: '🦜' },
+            { id: 11, name: 'Philodendron', price: 'KSh 2,080', icon: '🍃' },
+            { id: 12, name: 'Dracaena', price: 'KSh 2,730', icon: '🌿' },
+            { id: 13, name: 'Boston Fern', price: 'KSh 1,820', icon: '🌿' },
+            { id: 14, name: 'Croton', price: 'KSh 1,690', icon: '🍂' },
+            { id: 15, name: 'Jade Plant', price: 'KSh 1,170', icon: '💎' },
+            { id: 16, name: 'Bamboo Palm', price: 'KSh 3,900', icon: '🎋' },
+            { id: 17, name: 'Calathea', price: 'KSh 2,470', icon: '🌿' },
+            { id: 18, name: 'Yucca Plant', price: 'KSh 3,120', icon: '🌵' },
+            { id: 19, name: 'Dieffenbachia', price: 'KSh 2,210', icon: '🌿' },
+            { id: 20, name: 'Norfolk Pine', price: 'KSh 4,160', icon: '🌲' }
+        ];
+        
+        function loadPlants() {
+            const grid = document.getElementById('plantsGrid');
+            grid.innerHTML = '';
+            
+            plants.forEach(plant => {
+                const card = document.createElement('div');
+                card.className = 'plant-card';
+                card.innerHTML = `
+                    <div class="plant-image">${plant.icon}</div>
+                    <div class="plant-info">
+                        <div class="plant-name">${plant.name}</div>
+                        <div class="plant-price">${plant.price}</div>
+                        <div class="plant-actions">
+                            <a href="edit-plant.html?id=${plant.id}" class="btn-small btn-edit">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <button onclick="deletePlant(${plant.id})" class="btn-small btn-delete">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        function deletePlant(id) {
+            if (confirm('Are you sure you want to delete this plant?')) {
+                const index = plants.findIndex(p => p.id === id);
+                if (index > -1) {
+                    plants.splice(index, 1);
+                    loadPlants();
+                    alert('Plant deleted successfully!');
+                }
+            }
+        }
+        
+        // Load plants on page load
+        loadPlants();
+    </script>
+</body>
+</html>
