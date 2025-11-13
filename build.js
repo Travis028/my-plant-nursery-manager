@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('Building Plant Nursery Manager...');
+console.log('🌱 Building Plant Nursery Manager...');
 
 // Create dist directory if it doesn't exist
 if (!fs.existsSync('dist')) {
   fs.mkdirSync('dist');
+  console.log('📁 Created dist directory');
 }
 
 // Copy static files to dist
@@ -101,8 +102,12 @@ const indexHtml = `
 </html>
 `;
 
-fs.writeFileSync('dist/index.html', indexHtml);
-
-console.log('✅ Build completed successfully!');
-console.log('📁 Files created in dist/ directory');
-console.log('🚀 Ready for Netlify deployment');
+try {
+  fs.writeFileSync('dist/index.html', indexHtml);
+  console.log('✅ Created index.html');
+  console.log('✅ Build completed successfully!');
+  console.log('🚀 Ready for Netlify deployment');
+} catch (error) {
+  console.error('❌ Build failed:', error);
+  process.exit(1);
+}

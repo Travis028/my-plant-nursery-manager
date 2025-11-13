@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Plant Nursery Management System",
   "scripts": {
-    "build": "node build.js",
+    "build": "echo 'Starting build...' && node build.js && echo 'Build complete!'",
     "start": "python run_web.py"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {},
   "devDependencies": {}
