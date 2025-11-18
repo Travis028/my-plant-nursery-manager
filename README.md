@@ -1,5 +1,7 @@
 # Plant Nursery Manager
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://my-plant-nursery-manager.onrender.com)
+
 A command-line and web application for managing a plant nursery, built with Python and SQLAlchemy.
 
 ## Features
