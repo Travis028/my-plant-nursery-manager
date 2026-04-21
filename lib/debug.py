@@ -1,3 +1,4 @@
+"""Debugging utilities and helpers."""
 from lib.database import sessionLocal
 from lib.models import customer, plant, sale
 
