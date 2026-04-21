@@ -55,6 +55,17 @@
             </a>
         </div>
     </div>
+    
+    <div class="stat-card" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 25px; border-radius: 15px; text-align: center; position: relative; overflow: hidden;">
+        <div class="stat-icon" style="background: #7b1fa2; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+            <i class="fas fa-users" style="color: white; font-size: 1.5rem;"></i>
+        </div>
+        <div class="stat-number" style="font-size: 2rem; font-weight: 700; color: #7b1fa2; margin-bottom: 5px;">{{ active_users_count or 0 }}</div>
+        <div style="color: #4a5568; font-weight: 500;">Active Users</div>
+        <div class="stat-trend" style="position: absolute; top: 10px; right: 15px; background: rgba(123, 31, 162, 0.1); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; color: #7b1fa2;">
+            <i class="fas fa-circle" style="color: #28a745;"></i> Online
+        </div>
+    </div>
 </div>
 
 <!-- Real-time stats -->
@@ -89,6 +100,17 @@
         <div style="color: #4a5568; font-weight: 500;">Sales Today</div>
         <div class="stat-trend" style="position: absolute; top: 10px; right: 15px; background: rgba(25, 118, 210, 0.1); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; color: #1976d2;">
             <i class="fas fa-arrow-up"></i> +15%
+        </div>
+    </div>
+    
+    <div class="stat-card" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 25px; border-radius: 15px; text-align: center; position: relative; overflow: hidden;">
+        <div class="stat-icon" style="background: #7b1fa2; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+            <i class="fas fa-users" style="color: white; font-size: 1.5rem;"></i>
+        </div>
+        <div class="stat-number" style="font-size: 2rem; font-weight: 700; color: #7b1fa2; margin-bottom: 5px;">{{ active_users_count or 0 }}</div>
+        <div style="color: #4a5568; font-weight: 500;">Active Users</div>
+        <div class="stat-trend" style="position: absolute; top: 10px; right: 15px; background: rgba(123, 31, 162, 0.1); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; color: #7b1fa2;">
+            <i class="fas fa-circle" style="color: #28a745;"></i> Online
         </div>
     </div>
 </div>
