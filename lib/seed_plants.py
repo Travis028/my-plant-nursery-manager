@@ -1,3 +1,4 @@
+"""Database seeding utilities for development."""
 from .database import Session
 from . import Plant
 
