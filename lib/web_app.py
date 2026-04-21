@@ -5,6 +5,7 @@ from . import Plant, Customer, Employee, Sale
 import os
 import requests
 from functools import wraps
+from datetime import datetime
 
 # Get the parent directory of lib to find templates
 template_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'templates')
@@ -13,6 +14,9 @@ app.secret_key = 'your-secret-key-here'
 
 # Simple user credentials (in production, use proper database)
 USERS = {}
+
+# Track active users and their login times
+ACTIVE_USERS = {}
 
 def login_required(f):
     @wraps(f)
@@ -82,7 +86,9 @@ def register():
         
         if username and password:
             USERS[username] = {'password': password, 'role': 'admin'}
-            flask_session['user'] = username
+            ACTIVE_USERS[username] = {
+            }
+            flask_session["user"] = username
             flash('Admin account created successfully!', 'success')
             return redirect(url_for('dashboard'))
         else:
@@ -102,6 +108,11 @@ def login():
         
         if username in USERS and USERS[username]['password'] == password:
             flask_session['user'] = username
+            # Track active user login
+            ACTIVE_USERS[username] = {
+                'login_time': datetime.now(),
+                'role': USERS[username]['role']
+            }
             flash('Login successful!', 'success')
             return redirect(url_for('dashboard'))
         else:
@@ -111,6 +122,9 @@ def login():
 
 @app.route('/logout')
 def logout():
+    username = flask_session.get('user')
+    if username:
+        ACTIVE_USERS.pop(username, None)
     flask_session.pop('user', None)
     flash('Logged out successfully', 'success')
     return redirect(url_for('landing'))
@@ -150,7 +164,7 @@ def manage_users():
         else:
             flash('All fields required', 'error')
     
-    return render_template('manage_users.html', users=USERS)
+    return render_template('manage_users.html', users=USERS, active_users=ACTIVE_USERS)
 
 @app.route('/dashboard')
 @login_required
@@ -167,7 +181,8 @@ def dashboard():
                          plants_count=plants_count,
                          sales_count=sales_count,
                          total_revenue=f"{total_revenue_ksh:,.2f}",
-                         users=USERS)
+                         users=USERS,
+                         active_users_count=len(ACTIVE_USERS))
 
 @app.route('/plants')
 @login_required
