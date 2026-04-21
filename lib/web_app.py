@@ -305,4 +305,4 @@ def record_sale():
     return render_template('record_sale.html', plants=plants)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)# TODO: Add password hashing for production
