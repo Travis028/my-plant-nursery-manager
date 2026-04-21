@@ -1,3 +1,4 @@
+"""Customer model for plant nursery management."""
 from sqlalchemy import Column, Integer, String, event
 from sqlalchemy.orm import relationship
 from lib.database import Base
