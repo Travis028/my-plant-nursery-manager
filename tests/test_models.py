@@ -1,3 +1,4 @@
+"""Test suite for data models."""
 import pytest
 from lib import Plant, Customer, Employee, Sale
 from lib.database import Base, engine, Session
