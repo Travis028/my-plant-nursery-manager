@@ -1,3 +1,4 @@
+"""Flask web application for plant nursery management."""
 from flask import Flask, render_template, request, redirect, url_for, flash, session as flask_session
 from sqlalchemy.orm import joinedload
 from .database import Session
