@@ -1,3 +1,4 @@
+"""Plant model for nursery inventory management."""
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, event
 from sqlalchemy.orm import relationship, validates
 from lib.database import Base
