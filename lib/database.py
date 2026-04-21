@@ -1,3 +1,4 @@
+# Database configuration and session management
 import os
 from contextlib import contextmanager
 from sqlalchemy import create_engine, event
