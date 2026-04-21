@@ -11,11 +11,7 @@ DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///nursery.db')
 # Configure engine with connection pooling and other settings
 engine = create_engine(
     DATABASE_URL,
-    echo=bool(os.environ.get('SQL_ECHO', False)),
-    pool_size=5,
-    max_overflow=10,
-    pool_timeout=30,
-    pool_recycle=3600
+    echo=bool(os.environ.get('SQL_ECHO', False))
 )
 
 # Create a thread-safe session factory

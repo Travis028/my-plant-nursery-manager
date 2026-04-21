@@ -10,50 +10,11 @@
             </h2>
             <p style="color: #6c757d;">Register managers and users for the system</p>
         </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
         <a href="/dashboard" class="btn btn-secondary" style="text-decoration: none;">
             <i class="fas fa-arrow-left"></i> Back to Dashboard
         </a>
     </div>
+
     <!-- Active Users Section -->
     <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
         <h3 style="color: #2e7d32; margin-bottom: 20px;">
@@ -111,46 +72,6 @@
                     </label>
                     <input type="text" id="username" name="username" required placeholder="Enter username">
                 </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
                 
                 <div class="form-group">
                     <label for="password">
@@ -159,46 +80,6 @@
                     </label>
                     <input type="password" id="password" name="password" required placeholder="Enter password">
                 </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
 
                 <div class="form-group">
                     <label for="role">
@@ -211,174 +92,14 @@
                         <option value="user">User</option>
                     </select>
                 </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
             </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
-            </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
             
             <div style="margin-top: 20px;">
                 <button type="submit" class="btn">
                     <i class="fas fa-plus"></i> Register User
                 </button>
             </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
         </form>
-    </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
     </div>
 
     <!-- Current Users List -->
@@ -400,46 +121,6 @@
                             <div style="background: {% if user_data.role == 'admin' %}#dc3545{% elif user_data.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
                                 <i class="fas fa-{% if user_data.role == 'admin' %}crown{% elif user_data.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white;"></i>
                             </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
                             <div>
                                 <div style="font-weight: 600; color: #333;">{{ username }}</div>
                                 <div style="font-size: 0.9rem; color: #6c757d;">
@@ -447,128 +128,8 @@
                                     {% elif user_data.role == 'manager' %}Trusted Manager
                                     {% else %}Regular User{% endif %}
                                 </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
                             </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
                         </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
                     </td>
                     <td>
                         <span style="background: {% if user_data.role == 'admin' %}#f8d7da; color: #721c24{% elif user_data.role == 'manager' %}#e8f5e8; color: #2e7d32{% else %}#e3f2fd; color: #1976d2{% endif %}; padding: 8px 16px; border-radius: 20px; font-weight: 600;">
@@ -585,55 +146,22 @@
                         {% endif %}
                     </td>
                     <td>
+                        {% if username in active_users %}
                         <span style="background: #d4edda; color: #155724; padding: 8px 16px; border-radius: 20px; font-weight: 600;">
                             <i class="fas fa-check-circle" style="margin-right: 5px;"></i>
                             Active
                         </span>
+                        {% else %}
+                        <span style="background: #f8f9fa; color: #6c757d; padding: 8px 16px; border-radius: 20px; font-weight: 600;">
+                            <i class="fas fa-clock" style="margin-right: 5px;"></i>
+                            Offline
+                        </span>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
     </div>
 
     <!-- Role Permissions Guide -->
@@ -651,46 +179,6 @@
                     <li>Full system access</li>
                 </ul>
             </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
             <div>
                 <h5 style="color: #2e7d32; margin-bottom: 10px;">👔 Manager</h5>
                 <ul style="color: #6c757d; margin: 0; padding-left: 20px; font-size: 0.9rem;">
@@ -699,46 +187,6 @@
                     <li>View all data</li>
                 </ul>
             </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
             <div>
                 <h5 style="color: #1976d2; margin-bottom: 10px;">👤 User</h5>
                 <ul style="color: #6c757d; margin: 0; padding-left: 20px; font-size: 0.9rem;">
@@ -747,127 +195,95 @@
                     <li>View sales data</li>
                 </ul>
             </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
         </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
-        </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
-    </div>
-    </div>
-    <!-- Active Users Section -->
-    <div style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 30px;">
-        <h3 style="color: #2e7d32; margin-bottom: 20px;">
-            <i class="fas fa-circle" style="color: #28a745; margin-right: 8px;"></i>
-            Active Users ({{ active_users|length }})
-        </h3>
-        
-        {% if active_users %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            {% for username, user_info in active_users.items() %}
-            <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 20px; border-radius: 15px; border-left: 4px solid #28a745;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="background: {% if user_info.role == 'admin' %}#dc3545{% elif user_info.role == 'manager' %}#2e7d32{% else %}#1976d2{% endif %}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
-                        <i class="fas fa-{% if user_info.role == 'admin' %}crown{% elif user_info.role == 'manager' %}user-tie{% else %}user{% endif %}" style="color: white; font-size: 1.2rem;"></i>
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; color: #333; font-size: 1.1rem;">{{ username }}</div>
-                        <div style="font-size: 0.9rem; color: #6c757d;">{{ user_info.role.title() }}</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.9rem; color: #6c757d;">
-                    <i class="fas fa-clock" style="margin-right: 5px;"></i>
-                    Logged in: {{ user_info.login_time.strftime('%H:%M %d/%m/%Y') }}
-                </div>
-                <div style="margin-top: 10px;">
-                    <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
-                        <i class="fas fa-circle" style="margin-right: 5px;"></i>
-                        Online Now
-                    </span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px; color: #6c757d;">
-            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
-            <p>No users are currently logged in</p>
-        </div>
-        {% endif %}
     </div>
 </div>
-{% endblock %}<- Document landing page Template: manage_users.html -->
+
+<style>
+.table-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 20px;
+    text-align: left;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+th {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #495057;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+tr:hover {
+    background: #f8f9fa;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.btn {
+    background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+}
+
+.btn-secondary:hover {
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+}
+</style>
+{% endblock %}

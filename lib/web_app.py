@@ -155,15 +155,39 @@ def profile():
 @admin_required
 def manage_users():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        role = request.form['role']
-        
-        if username and password and role:
+        try:
+            username = request.form.get('username', '').strip()
+            password = request.form.get('password', '').strip()
+            role = request.form.get('role', '').strip()
+            
+            # Validation
+            if not username or not password or not role:
+                flash('All fields are required', 'error')
+                return redirect(url_for('manage_users'))
+            
+            if len(username) < 3:
+                flash('Username must be at least 3 characters long', 'error')
+                return redirect(url_for('manage_users'))
+            
+            if len(password) < 6:
+                flash('Password must be at least 6 characters long', 'error')
+                return redirect(url_for('manage_users'))
+            
+            if role not in ['admin', 'manager', 'user']:
+                flash('Invalid role selected', 'error')
+                return redirect(url_for('manage_users'))
+            
+            if username in USERS:
+                flash(f'Username "{username}" already exists', 'error')
+                return redirect(url_for('manage_users'))
+            
+            # Create user
             USERS[username] = {'password': password, 'role': role}
             flash(f'{role.title()} {username} added successfully!', 'success')
-        else:
-            flash('All fields required', 'error')
+            
+        except Exception as e:
+            flash(f'Error creating user: {str(e)}', 'error')
+            return redirect(url_for('manage_users'))
     
     return render_template('manage_users.html', users=USERS, active_users=ACTIVE_USERS)
 
