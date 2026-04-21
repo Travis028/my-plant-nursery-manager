@@ -1,3 +1,4 @@
+"""Employee model for plant nursery staff."""
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime, event, func
 from sqlalchemy.orm import relationship, validates
