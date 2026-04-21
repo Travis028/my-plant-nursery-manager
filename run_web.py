@@ -1,3 +1,4 @@
+"""Web application entry point."""
 #!/usr/bin/env python3
 from lib.web_app import app
 
