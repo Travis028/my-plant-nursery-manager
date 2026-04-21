@@ -1,3 +1,4 @@
+"""Helper functions and utilities."""
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 from .models import Plant, Customer, Employee, Sale
