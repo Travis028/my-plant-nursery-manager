@@ -1,3 +1,4 @@
+"""Sale model for transaction tracking."""
 
 from datetime import datetime
 from sqlalchemy import Column, Integer, Float, ForeignKey, DateTime, event, func
