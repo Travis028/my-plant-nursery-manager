@@ -307,3 +307,4 @@ def record_sale():
 
 if __name__ == '__main__':
     app.run(debug=True)# TODO: Add password hashing for production
+# Performance optimizations
