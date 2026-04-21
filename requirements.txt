@@ -1,3 +1,4 @@
+# Python dependencies for plant nursery manager
 Flask==2.3.3
 SQLAlchemy==2.0.21
 requests==2.31.0
