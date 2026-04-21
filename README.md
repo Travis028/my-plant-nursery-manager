@@ -374,3 +374,4 @@ For support, please open an issue on GitHub or contact the maintainers.
 
 **Made with ❤️ for plant nursery management**
 # Additional development notes
+# Final project notes
