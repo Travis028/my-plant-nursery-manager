@@ -1,3 +1,4 @@
+"""Test suite for database seeding."""
 from lib.database import Session
 from lib import Plant, Customer, Employee, Sale
 from lib.seed import seed
