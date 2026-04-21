@@ -1,3 +1,4 @@
+"""Package setup and installation configuration."""
 
 from setuptools import setup, find_packages
 
