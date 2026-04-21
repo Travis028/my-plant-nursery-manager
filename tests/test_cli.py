@@ -1,3 +1,4 @@
+"""Test suite for CLI functionality."""
 import builtins
 from lib.database import Base, engine, Session
 from lib import Plant
